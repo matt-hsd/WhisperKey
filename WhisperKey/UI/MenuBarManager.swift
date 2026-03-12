@@ -17,8 +17,9 @@ final class MenuBarManager {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "mic.fill", accessibilityDescription: "WhisperKey")
-            button.image?.size = NSSize(width: 16, height: 16)
+            let icon = NSImage(named: "MenuBarIcon")
+            icon?.isTemplate = true
+            button.image = icon
         }
 
         updateMenu()
@@ -27,9 +28,14 @@ final class MenuBarManager {
     /// Update the menu bar icon to indicate recording state
     func setRecording(_ isRecording: Bool) {
         if let button = statusItem?.button {
-            let symbolName = isRecording ? "mic.fill.badge.plus" : "mic.fill"
-            button.image = NSImage(systemSymbolName: symbolName, accessibilityDescription: "WhisperKey")
-            button.image?.size = NSSize(width: 16, height: 16)
+            if isRecording {
+                button.image = NSImage(systemSymbolName: "waveform", accessibilityDescription: "WhisperKey Recording")
+                button.image?.size = NSSize(width: 16, height: 16)
+            } else {
+                let icon = NSImage(named: "MenuBarIcon")
+                icon?.isTemplate = true
+                button.image = icon
+            }
         }
     }
 

@@ -6,7 +6,7 @@ final class RecordingIndicatorWindow: NSPanel {
 
     init() {
         super.init(
-            contentRect: NSRect(x: 0, y: 0, width: 140, height: 36),
+            contentRect: NSRect(x: 0, y: 0, width: 180, height: 72),
             styleMask: [.borderless, .nonactivatingPanel],
             backing: .buffered,
             defer: false
@@ -33,7 +33,7 @@ final class RecordingIndicatorWindow: NSPanel {
         let menuBarHeight = screen.frame.height - screen.visibleFrame.height - (screen.visibleFrame.origin.y - screen.frame.origin.y)
 
         let x = (screenFrame.width - frame.width) / 2 + screenFrame.origin.x
-        let y = screenFrame.maxY - menuBarHeight - frame.height - 4
+        let y = screenFrame.maxY - menuBarHeight - frame.height - 4 - (screen.visibleFrame.height * 0.20)
 
         setFrameOrigin(NSPoint(x: x, y: y))
     }
@@ -76,6 +76,8 @@ struct RecordingIndicatorView: View {
             Capsule()
                 .fill(Color.black.opacity(0.75))
         )
+        .shadow(color: Color(red: 0.36, green: 0.88, blue: 0.84).opacity(0.45), radius: 12, x: 0, y: 0)
+        .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 2)
         .onAppear {
             isPulsing = true
         }

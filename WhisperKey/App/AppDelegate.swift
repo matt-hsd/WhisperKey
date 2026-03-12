@@ -72,6 +72,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             .sink { _ in
                 HotkeyManager.shared.start()
             }
+            }
             .store(in: &cancellables)
     }
 
